@@ -8,12 +8,14 @@ contract OptimizedRequire {
 
     // Optimize this function
     function purchaseToken() external payable {
-        require(
-            msg.value == 0.1 ether &&
-                block.timestamp > lastPurchaseTime + COOLDOWN,
-            'cannot purchase'
-        );
-        lastPurchaseTime = block.timestamp;
-        // mint the user a token
+        // Split both conditions into separate require statements.
+        // Moved the entire code into an unchecked block (saved some gas because we are performing addition).
+
+        unchecked {
+            require(msg.value == 0.1 ether);
+            require(block.timestamp > lastPurchaseTime + COOLDOWN);
+            lastPurchaseTime = block.timestamp;
+            // mint the user a token
+        }
     }
 }
