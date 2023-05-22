@@ -12,12 +12,10 @@ contract OptimizedArraySum {
     }
 
     // optimize this function
-    function getArraySum() external view returns (uint256) {
-        uint256 sum;
+    function getArraySum() external view returns (uint256 sum) {
+        // Declared sum var in function "returns" definition so that we don't need to return sum var explicitly
         for (uint256 i = 0; i < array.length; i++) {
             sum += array[i];
         }
-
-        return sum;
     }
 }
