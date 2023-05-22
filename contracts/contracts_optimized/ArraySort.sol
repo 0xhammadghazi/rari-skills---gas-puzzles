@@ -5,33 +5,26 @@ contract OptimizedArraySort {
     function sortArray(
         uint256[] calldata data
     ) external pure returns (uint256[] memory) {
-        // uint256 dataLen = data.length;
+        // 1. Read the array length to iterate over directly from the calldata array instead of memory.
+        // 2. Copied the entire calldata array to memory at once instead of copying index by index.
+        // 3. Declared the 'temp' variable outside the loop instead of inside the loop.
+        // 4. Moved the entire sorting algorithm to the unchecked block as we were performing addition multiple times (i++, j++, and j = i+1).
 
-        // Create 'working' copy
         uint[] memory _data = data;
-        // for (uint256 k = 0; k < _data.length; k++) {
-        //     _data[k] = data[k];
-        // }
 
         uint256 temp;
-
-        for (uint256 i = 0; i < data.length; ) {
-            for (uint256 j = i + 1; j < data.length; ) {
-                if (_data[i] > _data[j]) {
-                    temp = _data[i];
-                    _data[i] = _data[j];
-                    _data[j] = temp;
+        unchecked {
+            for (uint256 i = 0; i < data.length; i++) {
+                for (uint256 j = i + 1; j < data.length; j++) {
+                    if (_data[i] > _data[j]) {
+                        temp = _data[i];
+                        _data[i] = _data[j];
+                        _data[j] = temp;
+                    }
                 }
-
-                unchecked {
-                    ++j;
-                }
-            }
-
-            unchecked {
-                ++i;
             }
         }
+
         return _data;
     }
 }
