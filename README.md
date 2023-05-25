@@ -1,4 +1,4 @@
-# [RareSkills](https://rareskills.io) [Gas Puzzles](https://github.com/RareSkills/gas-puzzles)
+## [My solutions](https://github.com/hammadghazi/rari-skills---gas-puzzles/tree/master/contracts/contracts_optimized) of [RareSkills Gas Puzzles](https://github.com/RareSkills/gas-puzzles).
 
 ## Solved Puzzles
 - [x] Distribute
